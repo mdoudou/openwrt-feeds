@@ -12,7 +12,7 @@ PKG_VERSION:=1.21
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=http://monkey.org/~marius/
+PKG_SOURCE_URL:=http://monkey.org/~marius/$(PKG_NAME)
 PKG_MD5SUM:=d5de81422b8797afa328f72c694b65bb
 
 include $(INCLUDE_DIR)/package.mk
