@@ -1,0 +1,3 @@
+# Full documentation: http://svnweb.freebsd.org/base/stable/9/lib/libradius/radius.conf.5?view=markup
+# <service-type>	<radius-server>		<shared-secret>
+# auth			192.168.1.1		mekmitasdigoat
