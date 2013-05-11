@@ -23,7 +23,7 @@ define Package/nylon
   SUBMENU:=Web Servers/Proxies
   TITLE:=A SOCKS4/SOCKS5 proxy server
   URL:=http://monkey.org/~marius/nylon/
-  DEPENDS:=+libevent
+  DEPENDS:=+libevent2
 endef
 
 define Package/nylon/conffiles
@@ -34,13 +34,13 @@ CONFIGURE_ARGS += \
 	--with-libevent="$(STAGING_DIR)/usr"
 
 CONFIGURE_VARS += \
-	CFLAGS="-D__USE_BSD"
+	CFLAGS="-D_BSD_SOURCE"
 
 define Package/nylon/install	
 	$(INSTALL_DIR) $(1)/usr/bin
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/src/$(PKG_NAME) $(1)/usr/bin/
 	$(INSTALL_DIR) $(1)/etc
-	$(INSTALL_DATA) files/$(PKG_NAME).conf.sample $(1)/etc/
+	$(INSTALL_DATA) files/$(PKG_NAME).conf.sample $(1)/etc/$(PKG_NAME).conf
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_BIN) files/$(PKG_NAME).init $(1)/etc/init.d/$(PKG_NAME)
 endef

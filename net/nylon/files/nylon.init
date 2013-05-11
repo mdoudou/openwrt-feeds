@@ -11,7 +11,7 @@ CONFIG="/etc/${NAME}.conf"
 start() {
 	if [ -r ${CONFIG} ]
 	then
-		service_start ${DAEMON} -c ${CONFIG}
+		service_start ${DAEMON} -s -c ${CONFIG}
 	fi
 }
 
