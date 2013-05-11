@@ -1,1 +1,1 @@
-[nylon](http://monkey.org/~marius/nylon/), SOCK4/SOCK5 server
+[nylon](http://monkey.org/~marius/nylon/), SOCKS4(a)/SOCKS5 server
