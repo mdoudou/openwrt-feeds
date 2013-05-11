@@ -21,7 +21,7 @@ define Package/nylon
   SECTION:=net
   CATEGORY:=Network
   SUBMENU:=Web Servers/Proxies
-  TITLE:=A SOCKS4/SOCKS5 proxy server
+  TITLE:=A SOCKS4(a)/SOCKS5 proxy server
   URL:=http://monkey.org/~marius/nylon/
   DEPENDS:=+libevent2
 endef
