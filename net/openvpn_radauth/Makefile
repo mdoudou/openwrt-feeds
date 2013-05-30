@@ -11,16 +11,16 @@ PKG_NAME:=openvpn_radauth
 PKG_VERSION:=1
 PKG_RELEASE:=1
 
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=http://www.wormhole.hu/~ice/$(PKG_NAME)
-PKG_MD5SUM:=eb2d88d4e36f89524bdaaaef0da27ab8
-
-PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(BUILD_VARIANT)/$(PKG_NAME)-$(PKG_VERSION)
+PKG_SOURCE_PROTO:=git
+PKG_SOURCE_URL:=git://github.com/melak/openvpn_radauth.git
+PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+PKG_SOURCE_VERSION:=c9564449810736e5d0c9ddd66a433b9ccbc7b98d
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
 
 include $(INCLUDE_DIR)/package.mk
 
 define Package/openvpn_radauth/Default
-  TITLE:=RADIUS auth script for OpenVPN using $(2)
+  TITLE:=RADIUS auth script for OpenVPN $(2)
   SECTION:=net
   CATEGORY:=Network
   URL:=http://www.wormhole.hu/~ice/openvpn_radauth/
@@ -30,11 +30,13 @@ define Package/openvpn_radauth/Default
   MAINTAINER:=Tamas TEVESZ <ice@extreme.hu>
 endef
 
-Package/openvpn_radauth-openssl=$(call Package/openvpn_radauth/Default,openssl,OpenSSL,+libopenssl)
-Package/openvpn_radauth-polarssl=$(call Package/openvpn_radauth/Default,polarssl,PolarSSL,+libpolarssl)
+Package/openvpn_radauth-openssl=$(call Package/openvpn_radauth/Default,openssl,using OpenSSL,+libopenssl)
+Package/openvpn_radauth-polarssl=$(call Package/openvpn_radauth/Default,polarssl,using PolarSSL,+libpolarssl)
+Package/openvpn_radauth-nossl=$(call Package/openvpn_radauth/Default,nossl,without an SSL library)
 
 Package/openvpn_radauth-openssl/config=$(call Package/openvpn_radauth/config/Default,openssl)
 Package/openvpn_radauth-polarssl/config=$(call Package/openvpn_radauth/config/Default,polarssl)
+Package/openvpn_radauth-nossl/config=$(call Package/openvpn_radauth/config/Default,nossl)
 
 MAKE_FLAGS+=WITH_SSL_IMPL=$(BUILD_VARIANT)
 
@@ -51,3 +53,4 @@ endef
 
 $(eval $(call BuildPackage,openvpn_radauth-openssl))
 $(eval $(call BuildPackage,openvpn_radauth-polarssl))
+$(eval $(call BuildPackage,openvpn_radauth-nossl))
