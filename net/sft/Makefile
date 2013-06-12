@@ -17,17 +17,18 @@ PKG_MD5SUM:=01ba22dd4af970c8e9e9732e14129610
 
 include $(INCLUDE_DIR)/package.mk
 
-define Package/sft
+define Package/$(PKG_NAME)
   SECTION:=net
   CATEGORY:=Network
   SUBMENU:=File Transfer
   TITLE:=A simple file transfer tool
   URL:=http://nbenoit.tuxfamily.org/index.php?page=SFT
+  MAINTAINER:=Tamas TEVESZ <ice@extreme.hu>
 endef
 
-define Package/sft/install	
+define Package/$(PKG_NAME)/install	
 	$(INSTALL_DIR) $(1)/usr/bin
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/src/$(PKG_NAME) $(1)/usr/bin/
 endef
 
-$(eval $(call BuildPackage,sft))
+$(eval $(call BuildPackage,$(PKG_NAME)))

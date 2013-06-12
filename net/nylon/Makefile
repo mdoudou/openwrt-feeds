@@ -17,17 +17,18 @@ PKG_MD5SUM:=d5de81422b8797afa328f72c694b65bb
 
 include $(INCLUDE_DIR)/package.mk
 
-define Package/nylon
+define Package/$(PKG_NAME)
   SECTION:=net
   CATEGORY:=Network
   SUBMENU:=Web Servers/Proxies
   TITLE:=A SOCKS4(a)/SOCKS5 proxy server
-  URL:=http://monkey.org/~marius/nylon/
+  URL:=http://monkey.org/~marius/$(PKG_NAME)/
   DEPENDS:=+libevent2
+  MAINTAINER:=Tamas TEVESZ <ice@extreme.hu>
 endef
 
-define Package/nylon/conffiles
-/etc/nylon.conf
+define Package/$(PKG_NAME)/conffiles
+/etc/$(PKG_NAME).conf
 endef
 
 CONFIGURE_ARGS += \
@@ -36,7 +37,7 @@ CONFIGURE_ARGS += \
 CONFIGURE_VARS += \
 	CFLAGS="-D_BSD_SOURCE"
 
-define Package/nylon/install	
+define Package/$(PKG_NAME)/install	
 	$(INSTALL_DIR) $(1)/usr/bin
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/src/$(PKG_NAME) $(1)/usr/bin/
 	$(INSTALL_DIR) $(1)/etc
@@ -45,4 +46,4 @@ define Package/nylon/install
 	$(INSTALL_BIN) files/$(PKG_NAME).init $(1)/etc/init.d/$(PKG_NAME)
 endef
 
-$(eval $(call BuildPackage,nylon))
+$(eval $(call BuildPackage,$(PKG_NAME)))
