@@ -8,13 +8,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=openvpn_radauth
-PKG_VERSION:=1
+PKG_VERSION:=2
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git
-PKG_SOURCE_URL:=git://github.com/melak/$(PKG_NAME).git
+PKG_SOURCE_URL:=https://github.com/melak/$(PKG_NAME).git
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
-PKG_SOURCE_VERSION:=c9564449810736e5d0c9ddd66a433b9ccbc7b98d
+PKG_SOURCE_VERSION:=7f81c0620a26178408cfb83c26c5887d4e2414df
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(BUILD_VARIANT)/$(PKG_NAME)-$(PKG_VERSION)
@@ -40,7 +40,8 @@ Package/$(PKG_NAME)-openssl/config=$(call Package/$(PKG_NAME)/config/Default,ope
 Package/$(PKG_NAME)-polarssl/config=$(call Package/$(PKG_NAME)/config/Default,polarssl)
 Package/$(PKG_NAME)-nossl/config=$(call Package/$(PKG_NAME)/config/Default,nossl)
 
-MAKE_FLAGS+=WITH_SSL_IMPL=$(BUILD_VARIANT)
+CFLAGS+=-DHAVE_STRL
+MAKE_FLAGS+=WITH_SSL_IMPL=$(BUILD_VARIANT) STRIP=:
 
 define Package/$(PKG_NAME)-$(BUILD_VARIANT)/conffiles
 /etc/openvpn/radius.conf
